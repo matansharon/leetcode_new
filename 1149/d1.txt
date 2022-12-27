@@ -1,0 +1,1073 @@
+﻿Data Science from Scratch Joel Grus
+Data Science from Scratch 
+by Joel Grus 
+Copyright © 2015 O’Reilly Media. All rights reserved. 
+Printed in the United States of America. 
+Published by O’Reilly Media, Inc., 1005 Gravenstein Highway North, Sebastopol, CA 95472. 
+O’Reilly books may be purchased for educational, business, or sales promotional use. Online editions are also available for most titles (http://safaribooksonline.com). For more information, contact our corporate/institutional sales department: 800-998-9938 or corporate@oreilly.com. 
+Editor: Marie Beaugureau 
+Production Editor: Melanie Yarbrough 
+Copyeditor: Nan Reinhardt 
+Proofreader: Eileen Cohen 
+Indexer: Ellen Troutman-Zaig 
+Interior Designer: David Futato 
+Cover Designer: Karen Montgomery 
+Illustrator: Rebecca Demarest 
+April 2015: First Edition
+Revision History for the First Edition 
+2015-04-10: First Release 
+See http://oreilly.com/catalog/errata.csp?isbn=9781491901427 for release details. 
+The O’Reilly logo is a registered trademark of O’Reilly Media, Inc. Data Science from Scratch, the cover image of a Rock Ptarmigan, and related trade dress are trademarks of O’Reilly Media, Inc. 
+While the publisher and the author have used good faith efforts to ensure that the information and instructions contained in this work are accurate, the publisher and the author disclaim all responsibility for errors or omissions, including without limitation responsibility for damages resulting from the use of or reliance on this work. Use of the information and instructions contained in this work is at your own risk. If any code samples or other technology this work contains or describes is subject to open source licenses or the intellectual property rights of others, it is your responsibility to ensure that your use thereof complies with such licenses and/or rights. 
+978-1-491-90142-7 
+[LSI]
+Preface
+Data Science 
+Data scientist has been called “the sexiest job of the 21st century,” presumably by someone who has never visited a fire station. Nonetheless, data science is a hot and growing field, and it doesn’t take a great deal of sleuthing to find analysts breathlessly prognosticating that over the next 10 years, we’ll need billions and billions more data scientists than we currently have. 
+But what is data science? After all, we can’t produce data scientists if we don’t know what data science is. According to a Venn diagram that is somewhat famous in the industry, data science lies at the intersection of: 
+Hacking skills 
+Math and statistics knowledge 
+Substantive expertise 
+Although I originally intended to write a book covering all three, I quickly realized that a thorough treatment of “substantive expertise” would require tens of thousands of pages. At that point, I decided to focus on the first two. My goal is to help you develop the hacking skills that you’ll need to get started doing data science. And my goal is to help you get comfortable with the mathematics and statistics that are at the core of data science. 
+This is a somewhat heavy aspiration for a book. The best way to learn hacking skills is by hacking on things. By reading this book, you will get a good understanding of the way I hack on things, which may not necessarily be the best way for you to hack on things. You will get a good understanding of some of the tools I use, which will not necessarily be the best tools for you to use. You will get a good understanding of the way I approach data problems, which may not necessarily be the best way for you to approach data problems. The intent (and the hope) is that my examples will inspire you try things your own way. All the code and data from the book is available on GitHub to get you started. 
+Similarly, the best way to learn mathematics is by doing mathematics. This is emphatically not a math book, and for the most part, we won’t be “doing mathematics.” However, you can’t really do data science without some understanding of probability and statistics and linear algebra. This means that, where appropriate, we will dive into mathematical equations, mathematical intuition, mathematical axioms, and cartoon versions of big mathematical ideas. I hope that you won’t be afraid to dive in with me. 
+Throughout it all, I also hope to give you a sense that playing with data is fun, because, well, playing with data is fun! (Especially compared to some of the alternatives, like tax preparation or coal mining.)
+From Scratch 
+There are lots and lots of data science libraries, frameworks, modules, and toolkits that efficiently implement the most common (as well as the least common) data science algorithms and techniques. If you become a data scientist, you will become intimately familiar with NumPy, with scikit-learn, with pandas, and with a panoply of other libraries. They are great for doing data science. But they are also a good way to start doing data science without actually understanding data science. 
+In this book, we will be approaching data science from scratch. That means we’ll be building tools and implementing algorithms by hand in order to better understand them. I put a lot of thought into creating implementations and examples that are clear, well commented, and readable. In most cases, the tools we build will be illuminating but impractical. They will work well on small toy data sets but fall over on “web scale” ones. 
+Throughout the book, I will point you to libraries you might use to apply these techniques to larger data sets. But we won’t be using them here. 
+There is a healthy debate raging over the best language for learning data science. Many people believe it’s the statistical programming language R. (We call those people wrong.) A few people suggest Java or Scala. However, in my opinion, Python is the obvious choice. 
+Python has several features that make it well suited for learning (and doing) data science: It’s free. 
+It’s relatively simple to code in (and, in particular, to understand). 
+It has lots of useful data science–related libraries. 
+I am hesitant to call Python my favorite programming language. There are other languages I find more pleasant, better-designed, or just more fun to code in. And yet pretty much every time I start a new data science project, I end up using Python. Every time I need to quickly prototype something that just works, I end up using Python. And every time I want to demonstrate data science concepts in a clear, easy-to-understand way, I end up using Python. Accordingly, this book uses Python. 
+The goal of this book is not to teach you Python. (Although it is nearly certain that by reading this book you will learn some Python.) I’ll take you through a chapter-long crash course that highlights the features that are most important for our purposes, but if you know nothing about programming in Python (or about programming at all) then you might want to supplement this book with some sort of “Python for Beginners” tutorial. 
+The remainder of our introduction to data science will take this same approach — going into detail where going into detail seems crucial or illuminating, at other times leaving details for you to figure out yourself (or look up on Wikipedia).
+Over the years, I’ve trained a number of data scientists. While not all of them have gone on to become world-changing data ninja rockstars, I’ve left them all better data scientists than I found them. And I’ve grown to believe that anyone who has some amount of mathematical aptitude and some amount of programming skill has the necessary raw materials to do data science. All she needs is an inquisitive mind, a willingness to work hard, and this book. Hence this book.
+Conventions Used in This Book 
+The following typographical conventions are used in this book: 
+Italic 
+Indicates new terms, URLs, email addresses, filenames, and file extensions. Constant width 
+Used for program listings, as well as within paragraphs to refer to program elements such as variable or function names, databases, data types, environment variables, statements, and keywords. 
+Constant width bold 
+Shows commands or other text that should be typed literally by the user. Constant width italic 
+Shows text that should be replaced with user-supplied values or by values determined by context. 
+TIP 
+This element signifies a tip or suggestion. 
+NOTE 
+This element signifies a general note. 
+WARNING 
+This element indicates a warning or caution.
+Using Code Examples 
+Supplemental material (code examples, exercises, etc.) is available for download at https://github.com/joelgrus/data-science-from-scratch. 
+This book is here to help you get your job done. In general, if example code is offered with this book, you may use it in your programs and documentation. You do not need to contact us for permission unless you’re reproducing a significant portion of the code. For example, writing a program that uses several chunks of code from this book does not require permission. Selling or distributing a CD-ROM of examples from O’Reilly books does require permission. Answering a question by citing this book and quoting example code does not require permission. Incorporating a significant amount of example code from this book into your product’s documentation does require permission. 
+We appreciate, but do not require, attribution. An attribution usually includes the title, author, publisher, and ISBN. For example: “Data Science from Scratch by Joel Grus (O’Reilly). Copyright 2015 Joel Grus, 978-1-4919-0142-7.” 
+If you feel your use of code examples falls outside fair use or the permission given above, feel free to contact us at permissions@oreilly.com.
+Safari® Books Online 
+NOTE 
+Safari Books Online is an on-demand digital library that delivers expert content in both book and video form from the world’s leading authors in technology and business. 
+Technology professionals, software developers, web designers, and business and creative professionals use Safari Books Online as their primary resource for research, problem solving, learning, and certification training. 
+Safari Books Online offers a range of plans and pricing for enterprise, government, education, and individuals. 
+Members have access to thousands of books, training videos, and prepublication manuscripts in one fully searchable database from publishers like O’Reilly Media, Prentice Hall Professional, Addison-Wesley Professional, Microsoft Press, Sams, Que, Peachpit Press, Focal Press, Cisco Press, John Wiley & Sons, Syngress, Morgan Kaufmann, IBM Redbooks, Packt, Adobe Press, FT Press, Apress, Manning, New Riders, McGraw-Hill, Jones & Bartlett, Course Technology, and hundreds more. For more information about Safari Books Online, please visit us online.
+How to Contact Us 
+Please address comments and questions concerning this book to the publisher: O’Reilly Media, Inc. 
+1005 Gravenstein Highway North 
+Sebastopol, CA 95472 
+800-998-9938 (in the United States or Canada) 
+707-829-0515 (international or local) 
+707-829-0104 (fax) 
+We have a web page for this book, where we list errata, examples, and any additional information. You can access this page at http://bit.ly/data-science-from-scratch. 
+To comment or ask technical questions about this book, send email to bookquestions@oreilly.com. 
+For more information about our books, courses, conferences, and news, see our website at http://www.oreilly.com. 
+Find us on Facebook: http://facebook.com/oreilly 
+Follow us on Twitter: http://twitter.com/oreillymedia 
+Watch us on YouTube: http://www.youtube.com/oreillymedia
+Acknowledgments 
+First, I would like to thank Mike Loukides for accepting my proposal for this book (and for insisting that I pare it down to a reasonable size). It would have been very easy for him to say, “Who’s this person who keeps emailing me sample chapters, and how do I get him to go away?” I’m grateful he didn’t. I’d also like to thank my editor, Marie Beaugureau, for guiding me through the publishing process and getting the book in a much better state than I ever would have gotten it on my own. 
+I couldn’t have written this book if I’d never learned data science, and I probably wouldn’t have learned data science if not for the influence of Dave Hsu, Igor Tatarinov, John Rauser, and the rest of the Farecast gang. (So long ago that it wasn’t even called data science at the time!) The good folks at Coursera deserve a lot of credit, too. 
+I am also grateful to my beta readers and reviewers. Jay Fundling found a ton of mistakes and pointed out many unclear explanations, and the book is much better (and much more correct) thanks to him. Debashis Ghosh is a hero for sanity-checking all of my statistics. Andrew Musselman suggested toning down the “people who prefer R to Python are moral reprobates” aspect of the book, which I think ended up being pretty good advice. Trey Causey, Ryan Matthew Balfanz, Loris Mularoni, Núria Pujol, Rob Jefferson, Mary Pat Campbell, Zach Geary, and Wendy Grus also provided invaluable feedback. Any errors remaining are of course my responsibility. 
+I owe a lot to the Twitter #datascience commmunity, for exposing me to a ton of new concepts, introducing me to a lot of great people, and making me feel like enough of an underachiever that I went out and wrote a book to compensate. Special thanks to Trey Causey (again), for (inadvertently) reminding me to include a chapter on linear algebra, and to Sean J. Taylor, for (inadvertently) pointing out a couple of huge gaps in the “Working with Data” chapter. 
+Above all, I owe immense thanks to Ganga and Madeline. The only thing harder than writing a book is living with someone who’s writing a book, and I couldn’t have pulled it off without their support.
+Chapter 1. Introduction 
+“Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.” Arthur Conan Doyle
+The Ascendance of Data 
+We live in a world that’s drowning in data. Websites track every user’s every click. Your smartphone is building up a record of your location and speed every second of every day. “Quantified selfers” wear pedometers-on-steroids that are ever recording their heart rates, movement habits, diet, and sleep patterns. Smart cars collect driving habits, smart homes 
+collect living habits, and smart marketers collect purchasing habits. The Internet itself represents a huge graph of knowledge that contains (among other things) an enormous cross-referenced encyclopedia; domain-specific databases about movies, music, sports 
+results, pinball machines, memes, and cocktails; and too many government statistics (some of them nearly true!) from too many governments to wrap your head around. 
+Buried in these data are answers to countless questions that no one’s ever thought to ask. In this book, we’ll learn how to find them.
+What Is Data Science? 
+There’s a joke that says a data scientist is someone who knows more statistics than a computer scientist and more computer science than a statistician. (I didn’t say it was a good joke.) In fact, some data scientists are — for all practical purposes — statisticians, while others are pretty much indistinguishable from software engineers. Some are machine-learning experts, while others couldn’t machine-learn their way out of kindergarten. Some are PhDs with impressive publication records, while others have never read an academic paper (shame on them, though). In short, pretty much no matter how you define data science, you’ll find practitioners for whom the definition is totally, absolutely wrong. 
+Nonetheless, we won’t let that stop us from trying. We’ll say that a data scientist is someone who extracts insights from messy data. Today’s world is full of people trying to turn data into insight. 
+For instance, the dating site OkCupid asks its members to answer thousands of questions in order to find the most appropriate matches for them. But it also analyzes these results to figure out innocuous-sounding questions you can ask someone to find out how likely someone is to sleep with you on the first date. 
+Facebook asks you to list your hometown and your current location, ostensibly to make it easier for your friends to find and connect with you. But it also analyzes these locations to identify global migration patterns and where the fanbases of different football teams live. 
+As a large retailer, Target tracks your purchases and interactions, both online and in-store. And it uses the data to predictively model which of its customers are pregnant, to better market baby-related purchases to them. 
+In 2012, the Obama campaign employed dozens of data scientists who data-mined and experimented their way to identifying voters who needed extra attention, choosing optimal donor-specific fundraising appeals and programs, and focusing get-out-the-vote efforts where they were most likely to be useful. It is generally agreed that these efforts played an important role in the president’s re-election, which means it is a safe bet that political campaigns of the future will become more and more data-driven, resulting in a never ending arms race of data science and data collection. 
+Now, before you start feeling too jaded: some data scientists also occasionally use their skills for good — using data to make government more effective, to help the homeless, and to improve public health. But it certainly won’t hurt your career if you like figuring out the best way to get people to click on advertisements.
+Motivating Hypothetical: DataSciencester 
+Congratulations! You’ve just been hired to lead the data science efforts at DataSciencester, the social network for data scientists. 
+Despite being for data scientists, DataSciencester has never actually invested in building its own data science practice. (In fairness, DataSciencester has never really invested in building its product either.) That will be your job! Throughout the book, we’ll be learning about data science concepts by solving problems that you encounter at work. Sometimes we’ll look at data explicitly supplied by users, sometimes we’ll look at data generated through their interactions with the site, and sometimes we’ll even look at data from experiments that we’ll design. 
+And because DataSciencester has a strong “not-invented-here” mentality, we’ll be building our own tools from scratch. At the end, you’ll have a pretty solid understanding of the fundamentals of data science. And you’ll be ready to apply your skills at a company with a less shaky premise, or to any other problems that happen to interest you. 
+Welcome aboard, and good luck! (You’re allowed to wear jeans on Fridays, and the bathroom is down the hall on the right.)
+Finding Key Connectors 
+It’s your first day on the job at DataSciencester, and the VP of Networking is full of questions about your users. Until now he’s had no one to ask, so he’s very excited to have you aboard. 
+In particular, he wants you to identify who the “key connectors” are among data scientists. To this end, he gives you a dump of the entire DataSciencester network. (In real life, people don’t typically hand you the data you need. Chapter 9 is devoted to getting data.) 
+What does this data dump look like? It consists of a list of users, each represented by a dict that contains for each user his or her id (which is a number) and name (which, in one of the great cosmic coincidences, rhymes with the user’s id): 
+users = [ 
+{ "id": 0, "name": "Hero" }, 
+{ "id": 1, "name": "Dunn" }, 
+{ "id": 2, "name": "Sue" }, 
+{ "id": 3, "name": "Chi" }, 
+{ "id": 4, "name": "Thor" }, 
+{ "id": 5, "name": "Clive" }, 
+{ "id": 6, "name": "Hicks" }, 
+{ "id": 7, "name": "Devin" }, 
+{ "id": 8, "name": "Kate" }, 
+{ "id": 9, "name": "Klein" } 
+] 
+He also gives you the “friendship” data, represented as a list of pairs of IDs: 
+friendships = [(0, 1), (0, 2), (1, 2), (1, 3), (2, 3), (3, 4), 
+(4, 5), (5, 6), (5, 7), (6, 8), (7, 8), (8, 9)] 
+For example, the tuple (0, 1) indicates that the data scientist with id 0 (Hero) and the data scientist with id 1 (Dunn) are friends. The network is illustrated in Figure 1-1. 
+  
+Figure 1-1. The DataSciencester network 
+Since we represented our users as dicts, it’s easy to augment them with extra data. 
+NOTE 
+Don’t get too hung up on the details of the code right now. In Chapter 2, we’ll take you through a crash course in Python. For now just try to get the general flavor of what we’re doing.
+For example, we might want to add a list of friends to each user. First we set each user’s friends property to an empty list: 
+for user in users: 
+user["friends"] = [] 
+And then we populate the lists using the friendships data: 
+for i, j in friendships: 
+# this works because users[i] is the user whose id is i 
+users[i]["friends"].append(users[j]) # add i as a friend of j 
+users[j]["friends"].append(users[i]) # add j as a friend of i 
+Once each user dict contains a list of friends, we can easily ask questions of our graph, like “what’s the average number of connections?” 
+First we find the total number of connections, by summing up the lengths of all the friends lists: 
+def number_of_friends(user): 
+"""how many friends does _user_ have?""" 
+return len(user["friends"]) # length of friend_ids list 
+total_connections = sum(number_of_friends(user) 
+for user in users) # 24 
+And then we just divide by the number of users: 
+from __future__ import division # integer division is lame num_users = len(users) # length of the users list avg_connections = total_connections / num_users # 2.4 
+It’s also easy to find the most connected people — they’re the people who have the largest number of friends. 
+Since there aren’t very many users, we can sort them from “most friends” to “least friends”: 
+# create a list (user_id, number_of_friends) 
+num_friends_by_id = [(user["id"], number_of_friends(user)) 
+for user in users] 
+sorted(num_friends_by_id, # get it sorted 
+key=lambda (user_id, num_friends): num_friends, # by num_friends 
+reverse=True) # largest to smallest 
+# each pair is (user_id, num_friends) 
+# [(1, 3), (2, 3), (3, 3), (5, 3), (8, 3), 
+# (0, 2), (4, 2), (6, 2), (7, 2), (9, 1)] 
+One way to think of what we’ve done is as a way of identifying people who are somehow central to the network. In fact, what we’ve just computed is the network metric degree centrality (Figure 1-2).
+  
+Figure 1-2. The DataSciencester network sized by degree 
+This has the virtue of being pretty easy to calculate, but it doesn’t always give the results you’d want or expect. For example, in the DataSciencester network Thor (id 4) only has two connections while Dunn (id 1) has three. Yet looking at the network it intuitively seems like Thor should be more central. In Chapter 21, we’ll investigate networks in more detail, and we’ll look at more complex notions of centrality that may or may not accord better with our intuition.
+Data Scientists You May Know 
+While you’re still filling out new-hire paperwork, the VP of Fraternization comes by your desk. She wants to encourage more connections among your members, and she asks you to design a “Data Scientists You May Know” suggester. 
+Your first instinct is to suggest that a user might know the friends of friends. These are easy to compute: for each of a user’s friends, iterate over that person’s friends, and collect all the results: 
+def friends_of_friend_ids_bad(user): 
+# "foaf" is short for "friend of a friend" 
+return [foaf["id"] 
+for friend in user["friends"] # for each of user's friends 
+for foaf in friend["friends"]] # get each of _their_ friends 
+When we call this on users[0] (Hero), it produces: 
+[0, 2, 3, 0, 1, 3] 
+It includes user 0 (twice), since Hero is indeed friends with both of his friends. It includes users 1 and 2, although they are both friends with Hero already. And it includes user 3 twice, as Chi is reachable through two different friends: 
+print [friend["id"] for friend in users[0]["friends"]] # [1, 2] 
+print [friend["id"] for friend in users[1]["friends"]] # [0, 2, 3] 
+print [friend["id"] for friend in users[2]["friends"]] # [0, 1, 3] 
+Knowing that people are friends-of-friends in multiple ways seems like interesting information, so maybe instead we should produce a count of mutual friends. And we definitely should use a helper function to exclude people already known to the user: 
+from collections import Counter # not loaded by default 
+def not_the_same(user, other_user): 
+"""two users are not the same if they have different ids""" 
+return user["id"] != other_user["id"] 
+def not_friends(user, other_user): 
+"""other_user is not a friend if he's not in user["friends"]; 
+that is, if he's not_the_same as all the people in user["friends"]""" 
+return all(not_the_same(friend, other_user) 
+for friend in user["friends"]) 
+def friends_of_friend_ids(user): 
+return Counter(foaf["id"] 
+for friend in user["friends"] # for each of my friends 
+for foaf in friend["friends"] # count *their* friends 
+if not_the_same(user, foaf) # who aren't me 
+and not_friends(user, foaf)) # and aren't my friends 
+print friends_of_friend_ids(users[3]) # Counter({0: 2, 5: 1}) 
+This correctly tells Chi (id 3) that she has two mutual friends with Hero (id 0) but only one mutual friend with Clive (id 5). 
+As a data scientist, you know that you also might enjoy meeting users with similar
+interests. (This is a good example of the “substantive expertise” aspect of data science.) After asking around, you manage to get your hands on this data, as a list of pairs (user_id, interest): 
+interests = [ 
+(0, "Hadoop"), (0, "Big Data"), (0, "HBase"), (0, "Java"), 
+(0, "Spark"), (0, "Storm"), (0, "Cassandra"), 
+(1, "NoSQL"), (1, "MongoDB"), (1, "Cassandra"), (1, "HBase"), 
+(1, "Postgres"), (2, "Python"), (2, "scikit-learn"), (2, "scipy"), 
+(2, "numpy"), (2, "statsmodels"), (2, "pandas"), (3, "R"), (3, "Python"), 
+(3, "statistics"), (3, "regression"), (3, "probability"), 
+(4, "machine learning"), (4, "regression"), (4, "decision trees"), 
+(4, "libsvm"), (5, "Python"), (5, "R"), (5, "Java"), (5, "C++"), 
+(5, "Haskell"), (5, "programming languages"), (6, "statistics"), 
+(6, "probability"), (6, "mathematics"), (6, "theory"), 
+(7, "machine learning"), (7, "scikit-learn"), (7, "Mahout"), 
+(7, "neural networks"), (8, "neural networks"), (8, "deep learning"), 
+(8, "Big Data"), (8, "artificial intelligence"), (9, "Hadoop"), 
+(9, "Java"), (9, "MapReduce"), (9, "Big Data") 
+] 
+For example, Thor (id 4) has no friends in common with Devin (id 7), but they share an interest in machine learning. 
+It’s easy to build a function that finds users with a certain interest: 
+def data_scientists_who_like(target_interest): 
+return [user_id 
+for user_id, user_interest in interests 
+if user_interest == target_interest] 
+This works, but it has to examine the whole list of interests for every search. If we have a lot of users and interests (or if we just want to do a lot of searches), we’re probably better off building an index from interests to users: 
+from collections import defaultdict 
+# keys are interests, values are lists of user_ids with that interest 
+user_ids_by_interest = defaultdict(list) 
+for user_id, interest in interests: 
+user_ids_by_interest[interest].append(user_id) 
+And another from users to interests: 
+# keys are user_ids, values are lists of interests for that user_id 
+interests_by_user_id = defaultdict(list) 
+for user_id, interest in interests: 
+interests_by_user_id[user_id].append(interest) 
+Now it’s easy to find who has the most interests in common with a given user: Iterate over the user’s interests. 
+For each interest, iterate over the other users with that interest. 
+Keep count of how many times we see each other user.
+def most_common_interests_with(user): 
+return Counter(interested_user_id 
+for interest in interests_by_user_id[user["id"]] 
+for interested_user_id in user_ids_by_interest[interest] 
+if interested_user_id != user["id"]) 
+We could then use this to build a richer “Data Scientists You Should Know” feature based on a combination of mutual friends and mutual interests. We’ll explore these kinds of applications in Chapter 22.
+Salaries and Experience 
+Right as you’re about to head to lunch, the VP of Public Relations asks if you can provide some fun facts about how much data scientists earn. Salary data is of course sensitive, but he manages to provide you an anonymous data set containing each user’s salary (in dollars) and tenure as a data scientist (in years): 
+salaries_and_tenures = [(83000, 8.7), (88000, 8.1), 
+(48000, 0.7), (76000, 6), 
+(69000, 6.5), (76000, 7.5), 
+(60000, 2.5), (83000, 10), 
+(48000, 1.9), (63000, 4.2)] 
+The natural first step is to plot the data (which we’ll see how to do in Chapter 3). You can see the results in Figure 1-3. 
+  
+Figure 1-3. Salary by years of experience 
+It seems pretty clear that people with more experience tend to earn more. How can you turn this into a fun fact? Your first idea is to look at the average salary for each tenure: 
+# keys are years, values are lists of the salaries for each tenure 
+salary_by_tenure = defaultdict(list) 
+for salary, tenure in salaries_and_tenures: 
+salary_by_tenure[tenure].append(salary)
+# keys are years, each value is average salary for that tenure 
+average_salary_by_tenure = { 
+tenure : sum(salaries) / len(salaries) 
+for tenure, salaries in salary_by_tenure.items() 
+} 
+This turns out to be not particularly useful, as none of the users have the same tenure, which means we’re just reporting the individual users’salaries: 
+{0.7: 48000.0, 
+1.9: 48000.0, 
+2.5: 60000.0, 
+4.2: 63000.0, 
+6: 76000.0, 
+6.5: 69000.0, 
+7.5: 76000.0, 
+8.1: 88000.0, 
+8.7: 83000.0, 
+10: 83000.0} 
+It might be more helpful to bucket the tenures: 
+def tenure_bucket(tenure): 
+if tenure < 2: 
+return "less than two" 
+elif tenure < 5: 
+return "between two and five" 
+else: 
+return "more than five" 
+Then group together the salaries corresponding to each bucket: 
+# keys are tenure buckets, values are lists of salaries for that bucket 
+salary_by_tenure_bucket = defaultdict(list) 
+for salary, tenure in salaries_and_tenures: 
+bucket = tenure_bucket(tenure) 
+salary_by_tenure_bucket[bucket].append(salary) 
+And finally compute the average salary for each group: 
+# keys are tenure buckets, values are average salary for that bucket 
+average_salary_by_bucket = { 
+tenure_bucket : sum(salaries) / len(salaries) 
+for tenure_bucket, salaries in salary_by_tenure_bucket.iteritems() 
+} 
+which is more interesting: 
+{'between two and five': 61500.0, 
+'less than two': 48000.0, 
+'more than five': 79166.66666666667} 
+And you have your soundbite: “Data scientists with more than five years experience earn 65% more than data scientists with little or no experience!” 
+But we chose the buckets in a pretty arbitrary way. What we’d really like is to make some sort of statement about the salary effect — on average — of having an additional year of
+experience. In addition to making for a snappier fun fact, this allows us to make predictions about salaries that we don’t know. We’ll explore this idea in Chapter 14.
+Paid Accounts 
+When you get back to your desk, the VP of Revenue is waiting for you. She wants to better understand which users pay for accounts and which don’t. (She knows their names, but that’s not particularly actionable information.) 
+You notice that there seems to be a correspondence between years of experience and paid accounts: 
+0.7 paid 
+1.9 unpaid 
+2.5 paid 
+4.2 unpaid 
+6 unpaid 
+6.5 unpaid 
+7.5 unpaid 
+8.1 unpaid 
+8.7 paid 
+10 paid 
+Users with very few and very many years of experience tend to pay; users with average amounts of experience don’t. 
+Accordingly, if you wanted to create a model — though this is definitely not enough data to base a model on — you might try to predict “paid” for users with very few and very many years of experience, and “unpaid” for users with middling amounts of experience: 
+def predict_paid_or_unpaid(years_experience): 
+if years_experience < 3.0: 
+return "paid" 
+elif years_experience < 8.5: 
+return "unpaid" 
+else: 
+return "paid" 
+Of course, we totally eyeballed the cutoffs. 
+With more data (and more mathematics), we could build a model predicting the likelihood that a user would pay, based on his years of experience. We’ll investigate this sort of problem in Chapter 16.
+Topics of Interest 
+As you’re wrapping up your first day, the VP of Content Strategy asks you for data about what topics users are most interested in, so that she can plan out her blog calendar accordingly. You already have the raw data from the friend-suggester project: 
+interests = [ 
+(0, "Hadoop"), (0, "Big Data"), (0, "HBase"), (0, "Java"), 
+(0, "Spark"), (0, "Storm"), (0, "Cassandra"), 
+(1, "NoSQL"), (1, "MongoDB"), (1, "Cassandra"), (1, "HBase"), 
+(1, "Postgres"), (2, "Python"), (2, "scikit-learn"), (2, "scipy"), 
+(2, "numpy"), (2, "statsmodels"), (2, "pandas"), (3, "R"), (3, "Python"), 
+(3, "statistics"), (3, "regression"), (3, "probability"), 
+(4, "machine learning"), (4, "regression"), (4, "decision trees"), 
+(4, "libsvm"), (5, "Python"), (5, "R"), (5, "Java"), (5, "C++"), 
+(5, "Haskell"), (5, "programming languages"), (6, "statistics"), 
+(6, "probability"), (6, "mathematics"), (6, "theory"), 
+(7, "machine learning"), (7, "scikit-learn"), (7, "Mahout"), 
+(7, "neural networks"), (8, "neural networks"), (8, "deep learning"), 
+(8, "Big Data"), (8, "artificial intelligence"), (9, "Hadoop"), 
+(9, "Java"), (9, "MapReduce"), (9, "Big Data") 
+] 
+One simple (if not particularly exciting) way to find the most popular interests is simply to count the words: 
+1. Lowercase each interest (since different users may or may not capitalize their interests). 
+2. Split it into words. 
+3. Count the results. 
+In code: 
+words_and_counts = Counter(word 
+for user, interest in interests 
+for word in interest.lower().split()) 
+This makes it easy to list out the words that occur more than once: 
+for word, count in words_and_counts.most_common(): 
+if count > 1: 
+print word, count 
+which gives the results you’d expect (unless you expect “scikit-learn” to get split into two words, in which case it doesn’t give the results you expect): 
+learning 3 
+java 3 
+python 3 
+big 3 
+data 3 
+hbase 2 
+regression 2 
+cassandra 2 
+statistics 2 
+probability 2 
+hadoop 2
+networks 2 
+machine 2 
+neural 2 
+scikit-learn 2 
+r 2 
+We’ll look at more sophisticated ways to extract topics from data in Chapter 20.
+Onward 
+It’s been a successful first day! Exhausted, you slip out of the building before anyone else can ask you for anything else. Get a good night’s rest, because tomorrow is new employee orientation. (Yes, you went through a full day of work before new employee orientation. Take it up with HR.)
+Chapter 2. A Crash Course in Python 
+People are still crazy about Python after twenty-five years, which I find hard to believe. Michael Palin 
+All new employees at DataSciencester are required to go through new employee orientation, the most interesting part of which is a crash course in Python. 
+This is not a comprehensive Python tutorial but instead is intended to highlight the parts of the language that will be most important to us (some of which are often not the focus of Python tutorials).
+The Basics
+Getting Python 
+You can download Python from python.org. But if you don’t already have Python, I recommend instead installing the Anaconda distribution, which already includes most of the libraries that you need to do data science. 
+As I write this, the latest version of Python is 3.4. At DataSciencester, however, we use old, reliable Python 2.7. Python 3 is not backward-compatible with Python 2, and many important libraries only work well with 2.7. The data science community is still firmly stuck on 2.7, which means we will be, too. Make sure to get that version. 
+If you don’t get Anaconda, make sure to install pip, which is a Python package manager that allows you to easily install third-party packages (some of which we’ll need). It’s also worth getting IPython, which is a much nicer Python shell to work with. 
+(If you installed Anaconda then it should have come with pip and IPython.) Just run: 
+pip install ipython 
+and then search the Internet for solutions to whatever cryptic error messages that causes.
+The Zen of Python 
+Python has a somewhat Zen description of its design principles, which you can also find inside the Python interpreter itself by typing import this. 
+One of the most discussed of these is: 
+There should be one — and preferably only one — obvious way to do it. 
+Code written in accordance with this “obvious” way (which may not be obvious at all to a newcomer) is often described as “Pythonic.” Although this is not a book about Python, we will occasionally contrast Pythonic and non-Pythonic ways of accomplishing the same things, and we will generally favor Pythonic solutions to our problems.
+Whitespace Formatting 
+Many languages use curly braces to delimit blocks of code. Python uses indentation: 
+for i in [1, 2, 3, 4, 5]: 
+print i # first line in "for i" block 
+for j in [1, 2, 3, 4, 5]: 
+print j # first line in "for j" block 
+print i + j # last line in "for j" block 
+print i # last line in "for i" block 
+print "done looping" 
+This makes Python code very readable, but it also means that you have to be very careful with your formatting. Whitespace is ignored inside parentheses and brackets, which can be helpful for long-winded computations: 
+long_winded_computation = (1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12 + 13 + 14 + 15 + 16 + 17 + 18 + 19 + 20) 
+and for making code easier to read: 
+list_of_lists = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] 
+easier_to_read_list_of_lists = [ [1, 2, 3], 
+[4, 5, 6], 
+[7, 8, 9] ] 
+You can also use a backslash to indicate that a statement continues onto the next line, although we’ll rarely do this: 
+two_plus_three = 2 + \ 
+3 
+One consequence of whitespace formatting is that it can be hard to copy and paste code into the Python shell. For example, if you tried to paste the code: 
+for i in [1, 2, 3, 4, 5]: 
+# notice the blank line 
+print i 
+into the ordinary Python shell, you would get a: 
+IndentationError: expected an indented block 
+because the interpreter thinks the blank line signals the end of the for loop’s block. 
+IPython has a magic function %paste, which correctly pastes whatever is on your clipboard, whitespace and all. This alone is a good reason to use IPython.
+Modules 
+Certain features of Python are not loaded by default. These include both features included as part of the language as well as third-party features that you download yourself. In order to use these features, you’ll need to import the modules that contain them. 
+One approach is to simply import the module itself: 
+import re 
+my_regex = re.compile("[0-9]+", re.I) 
+Here re is the module containing functions and constants for working with regular expressions. After this type of import you can only access those functions by prefixing them with re.. 
+If you already had a different re in your code you could use an alias: 
+import re as regex 
+my_regex = regex.compile("[0-9]+", regex.I) 
+You might also do this if your module has an unwieldy name or if you’re going to be typing it a lot. For example, when visualizing data with matplotlib, a standard convention is: 
+import matplotlib.pyplot as plt 
+If you need a few specific values from a module, you can import them explicitly and use them without qualification: 
+from collections import defaultdict, Counter 
+lookup = defaultdict(int) 
+my_counter = Counter() 
+If you were a bad person, you could import the entire contents of a module into your namespace, which might inadvertently overwrite variables you’ve already defined: 
+match = 10 
+from re import * # uh oh, re has a match function 
+print match # "<function re.match>" 
+However, since you are not a bad person, you won’t ever do this.
+Arithmetic 
+Python 2.7 uses integer division by default, so that 5 / 2 equals 2. Almost always this is not what we want, so we will always start our files with: 
+from __future__ import division 
+after which 5 / 2 equals 2.5. Every code example in this book uses this new-style division. In the handful of cases where we need integer division, we can get it with a double slash: 5 // 2.
+Functions 
+A function is a rule for taking zero or more inputs and returning a corresponding output. In Python, we typically define functions using def: 
+def double(x): 
+"""this is where you put an optional docstring 
+that explains what the function does. 
+for example, this function multiplies its input by 2""" 
+return x * 2 
+Python functions are first-class, which means that we can assign them to variables and pass them into functions just like any other arguments: 
+def apply_to_one(f): 
+"""calls the function f with 1 as its argument""" 
+return f(1) 
+my_double = double # refers to the previously defined function 
+x = apply_to_one(my_double) # equals 2 
+It is also easy to create short anonymous functions, or lambdas: 
+y = apply_to_one(lambda x: x + 4) # equals 5 
+You can assign lambdas to variables, although most people will tell you that you should just use def instead: 
+another_double = lambda x: 2 * x # don't do this 
+def another_double(x): return 2 * x # do this instead 
+Function parameters can also be given default arguments, which only need to be specified when you want a value other than the default: 
+def my_print(message="my default message"): 
+print message 
+my_print("hello") # prints 'hello' 
+my_print() # prints 'my default message' 
+It is sometimes useful to specify arguments by name: 
+def subtract(a=0, b=0): 
+return a - b 
+subtract(10, 5) # returns 5 
+subtract(0, 5) # returns -5 
+subtract(b=5) # same as previous 
+We will be creating many, many functions.
+Strings 
+Strings can be delimited by single or double quotation marks (but the quotes have to match): 
+single_quoted_string = 'data science' 
+double_quoted_string = "data science" 
+Python uses backslashes to encode special characters. For example: 
+tab_string = "\t" # represents the tab character 
+len(tab_string) # is 1 
+If you want backslashes as backslashes (which you might in Windows directory names or in regular expressions), you can create raw strings using r"": 
+not_tab_string = r"\t" # represents the characters '\' and 't' 
+len(not_tab_string) # is 2 
+You can create multiline strings using triple-[double-]-quotes: 
+multi_line_string = """This is the first line. 
+and this is the second line 
+and this is the third line"""
+Exceptions 
+When something goes wrong, Python raises an exception. Unhandled, these will cause your program to crash. You can handle them using try and except: 
+try: 
+print 0 / 0 
+except ZeroDivisionError: 
+print "cannot divide by zero" 
+Although in many languages exceptions are considered bad, in Python there is no shame in using them to make your code cleaner, and we will occasionally do so.
+Lists 
+Probably the most fundamental data structure in Python is the list. A list is simply an ordered collection. (It is similar to what in other languages might be called an array, but with some added functionality.) 
+integer_list = [1, 2, 3] 
+heterogeneous_list = ["string", 0.1, True] 
+list_of_lists = [ integer_list, heterogeneous_list, [] ] 
+list_length = len(integer_list) # equals 3 
+list_sum = sum(integer_list) # equals 6 
+You can get or set the nth element of a list with square brackets: 
+x = range(10) # is the list [0, 1, ..., 9] 
+zero = x[0] # equals 0, lists are 0-indexed 
+one = x[1] # equals 1 
+nine = x[-1] # equals 9, 'Pythonic' for last element 
+eight = x[-2] # equals 8, 'Pythonic' for next-to-last element 
+x[0] = -1 # now x is [-1, 1, 2, 3, ..., 9] 
+You can also use square brackets to “slice” lists: 
+first_three = x[:3] # [-1, 1, 2] 
+three_to_end = x[3:] # [3, 4, ..., 9] 
+one_to_four = x[1:5] # [1, 2, 3, 4] 
+last_three = x[-3:] # [7, 8, 9] 
+without_first_and_last = x[1:-1] # [1, 2, ..., 8] 
+copy_of_x = x[:] # [-1, 1, 2, ..., 9] 
+Python has an in operator to check for list membership: 
+1 in [1, 2, 3] # True 
+0 in [1, 2, 3] # False 
+This check involves examining the elements of the list one at a time, which means that you probably shouldn’t use it unless you know your list is pretty small (or unless you don’t care how long the check takes). 
+It is easy to concatenate lists together: 
+x = [1, 2, 3] 
+x.extend([4, 5, 6]) # x is now [1,2,3,4,5,6] 
+If you don’t want to modify x you can use list addition: 
+x = [1, 2, 3] 
+y = x + [4, 5, 6] # y is [1, 2, 3, 4, 5, 6]; x is unchanged 
+More frequently we will append to lists one item at a time: 
+x = [1, 2, 3] 
+x.append(0) # x is now [1, 2, 3, 0] 
+y = x[-1] # equals 0 
+z = len(x) # equals 4
+It is often convenient to unpack lists if you know how many elements they contain: x, y = [1, 2] # now x is 1, y is 2 
+although you will get a ValueError if you don’t have the same numbers of elements on both sides. 
+It’s common to use an underscore for a value you’re going to throw away: _, y = [1, 2] # now y == 2, didn't care about the first element
+Tuples 
+Tuples are lists’ immutable cousins. Pretty much anything you can do to a list that doesn’t involve modifying it, you can do to a tuple. You specify a tuple by using parentheses (or nothing) instead of square brackets: 
+my_list = [1, 2] 
+my_tuple = (1, 2) 
+other_tuple = 3, 4 
+my_list[1] = 3 # my_list is now [1, 3] 
+try: 
+my_tuple[1] = 3 
+except TypeError: 
+print "cannot modify a tuple" 
+Tuples are a convenient way to return multiple values from functions: 
+def sum_and_product(x, y): 
+return (x + y),(x * y) 
+sp = sum_and_product(2, 3) # equals (5, 6) 
+s, p = sum_and_product(5, 10) # s is 15, p is 50 
+Tuples (and lists) can also be used for multiple assignment: 
+x, y = 1, 2 # now x is 1, y is 2 
+x, y = y, x # Pythonic way to swap variables; now x is 2, y is 1
+Dictionaries 
+Another fundamental data structure is a dictionary, which associates values with keys and allows you to quickly retrieve the value corresponding to a given key: 
+empty_dict = {} # Pythonic 
+empty_dict2 = dict() # less Pythonic 
+grades = { "Joel" : 80, "Tim" : 95 } # dictionary literal 
+You can look up the value for a key using square brackets: 
+joels_grade = grades["Joel"] # equals 80 
+But you’ll get a KeyError if you ask for a key that’s not in the dictionary: 
+try: 
+kates_grade = grades["Kate"] 
+except KeyError: 
+print "no grade for Kate!" 
+You can check for the existence of a key using in: 
+joel_has_grade = "Joel" in grades # True 
+kate_has_grade = "Kate" in grades # False 
+Dictionaries have a get method that returns a default value (instead of raising an exception) when you look up a key that’s not in the dictionary: 
+joels_grade = grades.get("Joel", 0) # equals 80 
+kates_grade = grades.get("Kate", 0) # equals 0 
+no_ones_grade = grades.get("No One") # default default is None 
+You assign key-value pairs using the same square brackets: 
+grades["Tim"] = 99 # replaces the old value 
+grades["Kate"] = 100 # adds a third entry 
+num_students = len(grades) # equals 3 
+We will frequently use dictionaries as a simple way to represent structured data: 
+tweet = { 
+"user" : "joelgrus", 
+"text" : "Data Science is Awesome", 
+"retweet_count" : 100, 
+"hashtags" : ["#data", "#science", "#datascience", "#awesome", "#yolo"] 
+} 
+Besides looking for specific keys we can look at all of them: 
+tweet_keys = tweet.keys() # list of keys 
+tweet_values = tweet.values() # list of values 
+tweet_items = tweet.items() # list of (key, value) tuples 
+"user" in tweet_keys # True, but uses a slow list in 
+"user" in tweet # more Pythonic, uses faster dict in
+"joelgrus" in tweet_values # True 
+Dictionary keys must be immutable; in particular, you cannot use lists as keys. If you need a multipart key, you should use a tuple or figure out a way to turn the key into a string. 
+defaultdict 
+Imagine that you’re trying to count the words in a document. An obvious approach is to create a dictionary in which the keys are words and the values are counts. As you check each word, you can increment its count if it’s already in the dictionary and add it to the dictionary if it’s not: 
+word_counts = {} 
+for word in document: 
+if word in word_counts: 
+word_counts[word] += 1 
+else: 
+word_counts[word] = 1 
+You could also use the “forgiveness is better than permission” approach and just handle the exception from trying to look up a missing key: 
+word_counts = {} 
+for word in document: 
+try: 
+word_counts[word] += 1 
+except KeyError: 
+word_counts[word] = 1 
+A third approach is to use get, which behaves gracefully for missing keys: 
+word_counts = {} 
+for word in document: 
+previous_count = word_counts.get(word, 0) 
+word_counts[word] = previous_count + 1 
+Every one of these is slightly unwieldy, which is why defaultdict is useful. A defaultdict is like a regular dictionary, except that when you try to look up a key it doesn’t contain, it first adds a value for it using a zero-argument function you provided when you created it. In order to use defaultdicts, you have to import them from collections: 
+from collections import defaultdict 
+word_counts = defaultdict(int) # int() produces 0 
+for word in document: 
+word_counts[word] += 1 
+They can also be useful with list or dict or even your own functions: 
+dd_list = defaultdict(list) # list() produces an empty list 
+dd_list[2].append(1) # now dd_list contains {2: [1]}
+dd_dict = defaultdict(dict) # dict() produces an empty dict 
+dd_dict["Joel"]["City"] = "Seattle" # { "Joel" : { "City" : Seattle"}} 
+dd_pair = defaultdict(lambda: [0, 0]) 
+dd_pair[2][1] = 1 # now dd_pair contains {2: [0,1]} 
+These will be useful when we’re using dictionaries to “collect” results by some key and don’t want to have to check every time to see if the key exists yet. 
+Counter 
+A Counter turns a sequence of values into a defaultdict(int)-like object mapping keys to counts. We will primarily use it to create histograms: 
+from collections import Counter 
+c = Counter([0, 1, 2, 0]) # c is (basically) { 0 : 2, 1 : 1, 2 : 1 } This gives us a very simple way to solve our word_counts problem: word_counts = Counter(document) 
+A Counter instance has a most_common method that is frequently useful: 
+# print the 10 most common words and their counts 
+for word, count in word_counts.most_common(10): 
+print word, count
+Sets 
+Another data structure is set, which represents a collection of distinct elements: 
+s = set() 
+s.add(1) # s is now { 1 } 
+s.add(2) # s is now { 1, 2 } 
+s.add(2) # s is still { 1, 2 } 
+x = len(s) # equals 2 
+y = 2 in s # equals True 
+z = 3 in s # equals False 
+We’ll use sets for two main reasons. The first is that in is a very fast operation on sets. If we have a large collection of items that we want to use for a membership test, a set is more appropriate than a list: 
+stopwords_list = ["a","an","at"] + hundreds_of_other_words + ["yet", "you"] 
+"zip" in stopwords_list # False, but have to check every element 
+stopwords_set = set(stopwords_list) 
+"zip" in stopwords_set # very fast to check 
+The second reason is to find the distinct items in a collection: 
+item_list = [1, 2, 3, 1, 2, 3] 
+num_items = len(item_list) # 6 
+item_set = set(item_list) # {1, 2, 3} 
+num_distinct_items = len(item_set) # 3 
+distinct_item_list = list(item_set) # [1, 2, 3] 
+We’ll use sets much less frequently than dicts and lists.
+Control Flow 
+As in most programming languages, you can perform an action conditionally using if: 
+if 1 > 2: 
+message = "if only 1 were greater than two…" 
+elif 1 > 3: 
+message = "elif stands for 'else if'" 
+else: 
+message = "when all else fails use else (if you want to)" 
+You can also write a ternary if-then-else on one line, which we will do occasionally: parity = "even" if x % 2 == 0 else "odd" 
+Python has a while loop: 
+x = 0 
+while x < 10: 
+print x, "is less than 10" 
+x += 1 
+although more often we’ll use for and in: 
+for x in range(10): 
+print x, "is less than 10" 
+If you need more-complex logic, you can use continue and break: 
+for x in range(10): 
+if x == 3: 
+continue # go immediately to the next iteration 
+if x == 5: 
+break # quit the loop entirely 
+print x 
+This will print 0, 1, 2, and 4.
+Truthiness 
+Booleans in Python work as in most other languages, except that they’re capitalized: 
+one_is_less_than_two = 1 < 2 # equals True 
+true_equals_false = True == False # equals False 
+Python uses the value None to indicate a nonexistent value. It is similar to other languages’ null: 
+x = None 
+print x == None # prints True, but is not Pythonic 
+print x is None # prints True, and is Pythonic 
+Python lets you use any value where it expects a Boolean. The following are all “Falsy”: False 
+None 
+[] (an empty list) 
+{} (an empty dict) 
+"" 
+set() 
+0 
+0.0 
+Pretty much anything else gets treated as True. This allows you to easily use if statements to test for empty lists or empty strings or empty dictionaries or so on. It also sometimes causes tricky bugs if you’re not expecting this behavior: 
+s = some_function_that_returns_a_string() 
+if s: 
+first_char = s[0] 
+else: 
+first_char = "" 
+A simpler way of doing the same is: 
+first_char = s and s[0] 
+since and returns its second value when the first is “truthy,” the first value when it’s not. Similarly, if x is either a number or possibly None: 
+safe_x = x or 0
+is definitely a number. 
+Python has an all function, which takes a list and returns True precisely when every element is truthy, and an any function, which returns True when at least one element is truthy: 
+all([True, 1, { 3 }]) # True 
+all([True, 1, {}]) # False, {} is falsy 
+any([True, 1, {}]) # True, True is truthy 
+all([]) # True, no falsy elements in the list 
+any([]) # False, no truthy elements in the list
+The Not-So-Basics 
+Here we’ll look at some more-advanced Python features that we’ll find useful for working with data.
+Sorting 
+Every Python list has a sort method that sorts it in place. If you don’t want to mess up your list, you can use the sorted function, which returns a new list: 
+x = [4,1,2,3] 
+y = sorted(x) # is [1,2,3,4], x is unchanged 
+x.sort() # now x is [1,2,3,4] 
+By default, sort (and sorted) sort a list from smallest to largest based on naively comparing the elements to one another. 
+If you want elements sorted from largest to smallest, you can specify a reverse=True parameter. And instead of comparing the elements themselves, you can compare the results of a function that you specify with key: 
+# sort the list by absolute value from largest to smallest 
+x = sorted([-4,1,-2,3], key=abs, reverse=True) # is [-4,3,-2,1] 
+# sort the words and counts from highest count to lowest 
+wc = sorted(word_counts.items(), 
+key=lambda (word, count): count, 
+reverse=True)
+List Comprehensions 
+Frequently, you’ll want to transform a list into another list, by choosing only certain elements, or by transforming elements, or both. The Pythonic way of doing this is list comprehensions: 
+even_numbers = [x for x in range(5) if x % 2 == 0] # [0, 2, 4] 
+squares = [x * x for x in range(5)] # [0, 1, 4, 9, 16] 
+even_squares = [x * x for x in even_numbers] # [0, 4, 16] 
+You can similarly turn lists into dictionaries or sets: 
+square_dict = { x : x * x for x in range(5) } # { 0:0, 1:1, 2:4, 3:9, 4:16 } square_set = { x * x for x in [1, -1] } # { 1 } 
+If you don’t need the value from the list, it’s conventional to use an underscore as the variable: 
+zeroes = [0 for _ in even_numbers] # has the same length as even_numbers A list comprehension can include multiple fors: 
+pairs = [(x, y) 
+for x in range(10) 
+for y in range(10)] # 100 pairs (0,0) (0,1) ... (9,8), (9,9) 
+and later fors can use the results of earlier ones: 
+increasing_pairs = [(x, y) # only pairs with x < y, for x in range(10) # range(lo, hi) equals 
+for y in range(x + 1, 10)] # [lo, lo + 1, ..., hi - 1] 
+We will use list comprehensions a lot.
+Generators and Iterators 
+A problem with lists is that they can easily grow very big. range(1000000) creates an actual list of 1 million elements. If you only need to deal with them one at a time, this can be a huge source of inefficiency (or of running out of memory). If you potentially only need the first few values, then calculating them all is a waste. 
+A generator is something that you can iterate over (for us, usually using for) but whose values are produced only as needed (lazily). 
+One way to create generators is with functions and the yield operator: 
+def lazy_range(n): 
+"""a lazy version of range""" 
+i = 0 
+while i < n: 
+yield i 
+i += 1 
+The following loop will consume the yielded values one at a time until none are left: 
+for i in lazy_range(10): 
+do_something_with(i) 
+(Python actually comes with a lazy_range function called xrange, and in Python 3, range itself is lazy.) This means you could even create an infinite sequence: 
+def natural_numbers(): 
+"""returns 1, 2, 3, ...""" 
+n = 1 
+while True: 
+yield n 
+n += 1 
+although you probably shouldn’t iterate over it without using some kind of break logic. 
+TIP 
+The flip side of laziness is that you can only iterate through a generator once. If you need to iterate through something multiple times, you’ll need to either recreate the generator each time or use a list. 
+A second way to create generators is by using for comprehensions wrapped in parentheses: 
+lazy_evens_below_20 = (i for i in lazy_range(20) if i % 2 == 0) 
+Recall also that every dict has an items() method that returns a list of its key-value pairs. More frequently we’ll use the iteritems() method, which lazily yields the key-value pairs one at a time as we iterate over it.
+Randomness 
+As we learn data science, we will frequently need to generate random numbers, which we can do with the random module: 
+import random 
+four_uniform_randoms = [random.random() for _ in range(4)] 
+# [0.8444218515250481, # random.random() produces numbers 
+# 0.7579544029403025, # uniformly between 0 and 1 
+# 0.420571580830845, # it's the random function we'll use 
+# 0.25891675029296335] # most often 
+The random module actually produces pseudorandom (that is, deterministic) numbers based on an internal state that you can set with random.seed if you want to get reproducible results: 
+random.seed(10) # set the seed to 10 
+print random.random() # 0.57140259469 
+random.seed(10) # reset the seed to 10 
+print random.random() # 0.57140259469 again 
+We’ll sometimes use random.randrange, which takes either 1 or 2 arguments and returns an element chosen randomly from the corresponding range(): 
+random.randrange(10) # choose randomly from range(10) = [0, 1, ..., 9] 
+random.randrange(3, 6) # choose randomly from range(3, 6) = [3, 4, 5] 
+There are a few more methods that we’ll sometimes find convenient. random.shuffle randomly reorders the elements of a list: 
+up_to_ten = range(10) 
+random.shuffle(up_to_ten) 
+print up_to_ten 
+# [2, 5, 1, 9, 7, 3, 8, 6, 4, 0] (your results will probably be different) If you need to randomly pick one element from a list you can use random.choice: my_best_friend = random.choice(["Alice", "Bob", "Charlie"]) # "Bob" for me 
+And if you need to randomly choose a sample of elements without replacement (i.e., with no duplicates), you can use random.sample: 
+lottery_numbers = range(60) 
+winning_numbers = random.sample(lottery_numbers, 6) # [16, 36, 10, 6, 25, 9] 
+To choose a sample of elements with replacement (i.e., allowing duplicates), you can just make multiple calls to random.choice: 
+four_with_replacement = [random.choice(range(10)) 
+for _ in range(4)] 
+# [9, 4, 4, 2]
+Regular Expressions 
+Regular expressions provide a way of searching text. They are incredibly useful but also fairly complicated, so much so that there are entire books written about them. We will explain their details the few times we encounter them; here are a few examples of how to use them in Python: 
+import re 
+print all([ # all of these are true, because not re.match("a", "cat"), # * 'cat' doesn't start with 'a' 
+re.search("a", "cat"), # * 'cat' has an 'a' in it 
+not re.search("c", "dog"), # * 'dog' doesn't have a 'c' in it 
+3 == len(re.split("[ab]", "carbs")), # * split on a or b to ['c','r','s'] "R-D-" == re.sub("[0-9]", "-", "R2D2") # * replace digits with dashes 
+]) # prints True
+Object-Oriented Programming 
+Like many languages, Python allows you to define classes that encapsulate data and the functions that operate on them. We’ll use them sometimes to make our code cleaner and simpler. It’s probably simplest to explain them by constructing a heavily annotated example. 
+Imagine we didn’t have the built-in Python set. Then we might want to create our own Set class. 
+What behavior should our class have? Given an instance of Set, we’ll need to be able to add items to it, remove items from it, and check whether it contains a certain value. We’ll create all of these as member functions, which means we’ll access them with a dot after a Set object: 
+# by convention, we give classes PascalCase names 
+class Set: 
+# these are the member functions 
+# every one takes a first parameter "self" (another convention) 
+# that refers to the particular Set object being used 
+def __init__(self, values=None): 
+"""This is the constructor. 
+It gets called when you create a new Set. 
+You would use it like 
+s1 = Set() # empty set 
+s2 = Set([1,2,2,3]) # initialize with values""" 
+self.dict = {} # each instance of Set has its own dict property 
+# which is what we'll use to track memberships 
+if values is not None: 
+for value in values: 
+self.add(value) 
+def __repr__(self): 
+"""this is the string representation of a Set object 
+if you type it at the Python prompt or pass it to str()""" 
+return "Set: " + str(self.dict.keys()) 
+# we'll represent membership by being a key in self.dict with value True 
+def add(self, value): 
+self.dict[value] = True 
+# value is in the Set if it's a key in the dictionary 
+def contains(self, value): 
+return value in self.dict 
+def remove(self, value): 
+del self.dict[value] 
+Which we could then use like: 
+s = Set([1,2,3]) 
+s.add(4) 
+print s.contains(4) # True 
+s.remove(3) 
+print s.contains(3) # False
+Functional Tools 
+When passing functions around, sometimes we’ll want to partially apply (or curry) functions to create new functions. As a simple example, imagine that we have a function of two variables: 
+def exp(base, power): 
+return base ** power 
+and we want to use it to create a function of one variable two_to_the whose input is a power and whose output is the result of exp(2, power). 
+We can, of course, do this with def, but this can sometimes get unwieldy: 
+def two_to_the(power): 
+return exp(2, power) 
+A different approach is to use functools.partial: 
+from functools import partial 
+two_to_the = partial(exp, 2) # is now a function of one variable 
+print two_to_the(3) # 8 
+You can also use partial to fill in later arguments if you specify their names: 
+square_of = partial(exp, power=2) 
+print square_of(3) # 9 
+It starts to get messy if you curry arguments in the middle of the function, so we’ll try to avoid doing that. 
+We will also occasionally use map, reduce, and filter, which provide functional alternatives to list comprehensions: 
+def double(x): 
+return 2 * x 
+xs = [1, 2, 3, 4] 
+twice_xs = [double(x) for x in xs] # [2, 4, 6, 8] 
+twice_xs = map(double, xs) # same as above 
+list_doubler = partial(map, double) # *function* that doubles a list 
+twice_xs = list_doubler(xs) # again [2, 4, 6, 8] 
+You can use map with multiple-argument functions if you provide multiple lists: 
+def multiply(x, y): return x * y 
+products = map(multiply, [1, 2], [4, 5]) # [1 * 4, 2 * 5] = [4, 10] 
+Similarly, filter does the work of a list-comprehension if: 
+def is_even(x): 
+"""True if x is even, False if x is odd""" 
+return x % 2 == 0
+x_evens = [x for x in xs if is_even(x)] # [2, 4] 
+x_evens = filter(is_even, xs) # same as above 
+list_evener = partial(filter, is_even) # *function* that filters a list x_evens = list_evener(xs) # again [2, 4] 
+And reduce combines the first two elements of a list, then that result with the third, that result with the fourth, and so on, producing a single result: 
+x_product = reduce(multiply, xs) # = 1 * 2 * 3 * 4 = 24 
+list_product = partial(reduce, multiply) # *function* that reduces a list x_product = list_product(xs) # again = 24
+enumerate 
+Not infrequently, you’ll want to iterate over a list and use both its elements and their indexes: 
+# not Pythonic 
+for i in range(len(documents)): 
+document = documents[i] 
+do_something(i, document) 
+# also not Pythonic 
+i = 0 
+for document in documents: 
+do_something(i, document) 
+i += 1 
+The Pythonic solution is enumerate, which produces tuples (index, element): 
+for i, document in enumerate(documents): 
+do_something(i, document) 
+Similarly, if we just want the indexes: 
+for i in range(len(documents)): do_something(i) # not Pythonic 
+for i, _ in enumerate(documents): do_something(i) # Pythonic 
+We’ll use this a lot.
+zip and Argument Unpacking 
+Often we will need to zip two or more lists together. zip transforms multiple lists into a single list of tuples of corresponding elements: 
+list1 = ['a', 'b', 'c'] 
+list2 = [1, 2, 3] 
+zip(list1, list2) # is [('a', 1), ('b', 2), ('c', 3)] 
+If the lists are different lengths, zip stops as soon as the first list ends. You can also “unzip” a list using a strange trick: 
+pairs = [('a', 1), ('b', 2), ('c', 3)] 
+letters, numbers = zip(*pairs) 
+The asterisk performs argument unpacking, which uses the elements of pairs as individual arguments to zip. It ends up the same as if you’d called: 
+zip(('a', 1), ('b', 2), ('c', 3)) 
+which returns [('a','b','c'), ('1','2','3')]. 
+You can use argument unpacking with any function: 
+def add(a, b): return a + b 
+add(1, 2) # returns 3 
+add([1, 2]) # TypeError! 
+add(*[1, 2]) # returns 3 
+It is rare that we’ll find this useful, but when we do it’s a neat trick.
+args and kwargs 
+Let’s say we want to create a higher-order function that takes as input some function f and returns a new function that for any input returns twice the value of f: 
+def doubler(f): 
+def g(x): 
+return 2 * f(x) 
+return g 
+This works in some cases: 
+def f1(x): 
+return x + 1 
+g = doubler(f1) 
+print g(3) # 8 (== ( 3 + 1) * 2) 
+print g(-1) # 0 (== (-1 + 1) * 2) 
+However, it breaks down with functions that take more than a single argument: 
+def f2(x, y): 
+return x + y 
+g = doubler(f2) 
+print g(1, 2) # TypeError: g() takes exactly 1 argument (2 given) 
+What we need is a way to specify a function that takes arbitrary arguments. We can do this with argument unpacking and a little bit of magic: 
+def magic(*args, **kwargs): 
+print "unnamed args:", args 
+print "keyword args:", kwargs 
+magic(1, 2, key="word", key2="word2") 
+# prints 
+# unnamed args: (1, 2) 
+# keyword args: {'key2': 'word2', 'key': 'word'} 
+That is, when we define a function like this, args is a tuple of its unnamed arguments and kwargs is a dict of its named arguments. It works the other way too, if you want to use a list (or tuple) and dict to supply arguments to a function: 
+def other_way_magic(x, y, z): 
+return x + y + z 
+x_y_list = [1, 2] 
+z_dict = { "z" : 3 } 
+print other_way_magic(*x_y_list, **z_dict) # 6 
+You could do all sorts of strange tricks with this; we will only use it to produce higher order functions whose inputs can accept arbitrary arguments: 
+def doubler_correct(f): 
+"""works no matter what kind of inputs f expects""" 
+def g(*args, **kwargs):
+"""whatever arguments g is supplied, pass them through to f""" return 2 * f(*args, **kwargs) 
+return g 
+g = doubler_correct(f2) 
+print g(1, 2) # 6
+Welcome to DataSciencester! 
+This concludes new-employee orientation. Oh, and also, try not to embezzle anything.
+For Further Exploration 
+There is no shortage of Python tutorials in the world. The official one is not a bad place to start. 
+The official IPython tutorial is not quite as good. You might be better off with their videos and presentations. Alternatively, Wes McKinney’s Python for Data Analysis (O’Reilly) has a really good IPython chapter.
+Chapter 3. Visualizing Data 
+I believe that visualization is one of the most powerful means of achieving personal goals. 
+Harvey Mackay 
+A fundamental part of the data scientist’s toolkit is data visualization. Although it is very easy to create visualizations, it’s much harder to produce good ones. 
+There are two primary uses for data visualization: 
+To explore data 
+To communicate data 
+In this chapter, we will concentrate on building the skills that you’ll need to start exploring your own data and to produce the visualizations we’ll be using throughout the rest of the book. Like most of our chapter topics, data visualization is a rich field of study that deserves its own book. Nonetheless, we’ll try to give you a sense of what makes for a good visualization and what doesn’t.
+matplotlib 
+A wide variety of tools exists for visualizing data. We will be using the matplotlib library, which is widely used (although sort of showing its age). If you are interested in producing elaborate interactive visualizations for the Web, it is likely not the right choice, but for simple bar charts, line charts, and scatterplots, it works pretty well. 
+In particular, we will be using the matplotlib.pyplot module. In its simplest use, pyplot maintains an internal state in which you build up a visualization step by step. Once you’re done, you can save it (with savefig()) or display it (with show()). 
+For example, making simple plots (like Figure 3-1) is pretty simple: 
+from matplotlib import pyplot as plt 
+years = [1950, 1960, 1970, 1980, 1990, 2000, 2010] 
+gdp = [300.2, 543.3, 1075.9, 2862.5, 5979.6, 10289.7, 14958.3] 
+# create a line chart, years on x-axis, gdp on y-axis 
+plt.plot(years, gdp, color='green', marker='o', linestyle='solid') 
+# add a title 
+plt.title("Nominal GDP") 
+# add a label to the y-axis 
+plt.ylabel("Billions of $") 
+plt.show() 
+  
+Figure 3-1. A simple line chart
+Making plots that look publication-quality good is more complicated and beyond the scope of this chapter. There are many ways you can customize your charts with (for example) axis labels, line styles, and point markers. Rather than attempt a comprehensive treatment of these options, we’ll just use (and call attention to) some of them in our examples. 
+NOTE 
+Although we won’t be using much of this functionality, matplotlib is capable of producing complicated plots within plots, sophisticated formatting, and interactive visualizations. Check out its documentation if you want to go deeper than we do in this book.
+Bar Charts 
+A bar chart is a good choice when you want to show how some quantity varies among some discrete set of items. For instance, Figure 3-2 shows how many Academy Awards were won by each of a variety of movies: 
+movies = ["Annie Hall", "Ben-Hur", "Casablanca", "Gandhi", "West Side Story"] num_oscars = [5, 11, 3, 8, 10] 
+# bars are by default width 0.8, so we'll add 0.1 to the left coordinates 
+# so that each bar is centered 
+xs = [i + 0.1 for i, _ in enumerate(movies)] 
+# plot bars with left x-coordinates [xs], heights [num_oscars] 
+plt.bar(xs, num_oscars) 
+plt.ylabel("# of Academy Awards") 
+plt.title("My Favorite Movies") 
+# label x-axis with movie names at bar centers 
+plt.xticks([i + 0.5 for i, _ in enumerate(movies)], movies) 
+plt.show() 
+  
+Figure 3-2. A simple bar chart 
+A bar chart can also be a good choice for plotting histograms of bucketed numeric values, in order to visually explore how the values are distributed, as in Figure 3-3:
+grades = [83,95,91,87,70,0,85,82,100,67,73,77,0] 
+decile = lambda grade: grade // 10 * 10 
+histogram = Counter(decile(grade) for grade in grades) 
+plt.bar([x - 4 for x in histogram.keys()], # shift each bar to the left by 4 histogram.values(), # give each bar its correct height 
+8) # give each bar a width of 8 
+plt.axis([-5, 105, 0, 5]) # x-axis from -5 to 105, 
+# y-axis from 0 to 5 
+plt.xticks([10 * i for i in range(11)]) # x-axis labels at 0, 10, ..., 100 plt.xlabel("Decile") 
+plt.ylabel("# of Students") 
+plt.title("Distribution of Exam 1 Grades") 
+plt.show() 
+  
+Figure 3-3. Using a bar chart for a histogram 
+The third argument to plt.bar specifies the bar width. Here we chose a width of 8 (which leaves a small gap between bars, since our buckets have width 10). And we shifted the bar left by 4, so that (for example) the “80” bar has its left and right sides at 76 and 84, and (hence) its center at 80. 
+The call to plt.axis indicates that we want the x-axis to range from -5 to 105 (so that the “0” and “100” bars are fully shown), and that the y-axis should range from 0 to 5. And the call to plt.xticks puts x-axis labels at 0, 10, 20, …, 100.
+Be judicious when using plt.axis(). When creating bar charts it is considered especially bad form for your y-axis not to start at 0, since this is an easy way to mislead people (Figure 3-4): 
+mentions = [500, 505] 
+years = [2013, 2014] 
+plt.bar([2012.6, 2013.6], mentions, 0.8) 
+plt.xticks(years) 
+plt.ylabel("# of times I heard someone say 'data science'") 
+# if you don't do this, matplotlib will label the x-axis 0, 1 
+# and then add a +2.013e3 off in the corner (bad matplotlib!) 
+plt.ticklabel_format(useOffset=False) 
+# misleading y-axis only shows the part above 500 
+plt.axis([2012.5,2014.5,499,506]) 
+plt.title("Look at the 'Huge' Increase!") 
+plt.show() 
+  
+Figure 3-4. A chart with a misleading y-axis 
+In Figure 3-5, we use more-sensible axes, and it looks far less impressive: 
+plt.axis([2012.5,2014.5,0,550]) 
+plt.title("Not So Huge Anymore") 
+plt.show()
+  
+Figure 3-5. The same chart with a nonmisleading y-axis
+Line Charts 
+As we saw already, we can make line charts using plt.plot(). These are a good choice for showing trends, as illustrated in Figure 3-6: 
+variance = [1, 2, 4, 8, 16, 32, 64, 128, 256] 
+bias_squared = [256, 128, 64, 32, 16, 8, 4, 2, 1] 
+total_error = [x + y for x, y in zip(variance, bias_squared)] 
+xs = [i for i, _ in enumerate(variance)] 
+# we can make multiple calls to plt.plot 
+# to show multiple series on the same chart 
+plt.plot(xs, variance, 'g-', label='variance') # green solid line 
+plt.plot(xs, bias_squared, 'r-.', label='bias^2') # red dot-dashed line plt.plot(xs, total_error, 'b:', label='total error') # blue dotted line 
+# because we've assigned labels to each series 
+# we can get a legend for free 
+# loc=9 means "top center" 
+plt.legend(loc=9) 
+plt.xlabel("model complexity") 
+plt.title("The Bias-Variance Tradeoff") 
+plt.show() 
+  
+Figure 3-6. Several line charts with a legend
+Scatterplots 
+A scatterplot is the right choice for visualizing the relationship between two paired sets of data. For example, Figure 3-7 illustrates the relationship between the number of friends your users have and the number of minutes they spend on the site every day: 
+friends = [ 70, 65, 72, 63, 71, 64, 60, 64, 67] 
+minutes = [175, 170, 205, 120, 220, 130, 105, 145, 190] 
+labels = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i'] 
+plt.scatter(friends, minutes) 
+# label each point 
+for label, friend_count, minute_count in zip(labels, friends, minutes): 
+plt.annotate(label, 
+xy=(friend_count, minute_count), # put the label with its point 
+xytext=(5, -5), # but slightly offset 
+textcoords='offset points') 
+plt.title("Daily Minutes vs. Number of Friends") 
+plt.xlabel("# of friends") 
+plt.ylabel("daily minutes spent on the site") 
+plt.show() 
+  
+Figure 3-7. A scatterplot of friends and time on the site 
+If you’re scattering comparable variables, you might get a misleading picture if you let matplotlib choose the scale, as in Figure 3-8:
