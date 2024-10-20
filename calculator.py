@@ -31,7 +31,7 @@ import streamlit as st
 import random
 
 def main():
-    st.title("Calculator Game")
+    st.title("Calculator Game!!!")
     num1 = random.randint(1, 100)
     num2 = random.randint(1, 100)
     st.write(f"The two numbers are: {num1} and {num2}")
