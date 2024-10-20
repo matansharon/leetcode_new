@@ -1,25 +1,27 @@
-import streamlit as st
-st.write("Welcome to the calculator program!")
 
-# def main():
-#     print("Welcome to the calculator program!")
-#     print("Please enter the first number: ")
-#     num1 = float(input())
-#     print("Please enter the second number: ")
-#     num2 = float(input())
-#     print("Please enter the operation you would like to perform: ")
-#     operation = input()
-#     if operation == "+":
-#         print(num1 + num2)
-#     elif operation == "-":
-#         print(num1 - num2)
-#     elif operation == "*":
-#         print(num1 * num2)
-#     elif operation == "/":
-#         print(num1 / num2)
-#     else:
-#         print("Invalid operation")
-#     print("Thank you for using the calculator program!")
-    
-# if __name__ == "__main__":
-#     main()
+import random
+
+def main():
+    while True:
+        num1 = random.randint(1, 100)
+        num2 = random.randint(1, 100)
+        print("The two numbers are:", num1, num2)
+        print('Guess the multiplication of the two numbers or enter "q" to quit:')
+        
+        user_input = input()
+        
+        if user_input.lower() == "q":
+            print("Goodbye!")
+            break
+        
+        try:
+            guess = int(user_input)
+            if guess == num1 * num2:
+                print('Correct')
+            else:
+                print('Wrong, the answer is:', num1 * num2)
+        except ValueError:
+            print("Please enter a valid number or 'q' to quit.")
+
+if __name__ == "__main__":
+    main()
